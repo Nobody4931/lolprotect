@@ -1,0 +1,33 @@
+[package]
+name = "lolprotect"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+members = ["lolprotect_core", "lolprotect_encrypt", "lolprotect_decrypt"]
+
+[dependencies]
+lolprotect_encrypt = { path = "./lolprotect_encrypt" }
+lolprotect_decrypt = { path = "./lolprotect_decrypt" }
+
+[[bin]]
+name = "lolencrypt"
+path = "lolprotect_encrypt/bin/lolencrypt.rs"
+
+[[bin]]
+name = "loldecrypt"
+path = "lolprotect_decrypt/bin/loldecrypt.rs"
+
+
+# Heavily optimizes and strips release builds
+[profile.release]
+opt-level = 3
+debug = false
+strip = true
+lto = true
+codegen-units = 1
+panic = "abort"
+
+# Optimizes external dependencies of dev builds
+[profile.dev.package."*"]
+opt-level = 3

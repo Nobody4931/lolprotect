@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - v[0-9]+.[0-9]+.[0-9]+
+
+jobs:
+  all:
+    name: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            ext: ''
+          - os: macos-latest
+            ext: ''
+          - os: windows-latest
+            ext: .exe
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build release profile
+        run: cargo build --release --verbose
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: lolprotect_${{ matrix.os }}
+          path: |
+            target/release/lolencrypt${{ matrix.ext }}
+            target/release/loldecrypt${{ matrix.ext }}

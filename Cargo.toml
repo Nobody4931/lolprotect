@@ -19,7 +19,7 @@ name = "loldecrypt"
 path = "lolprotect_decrypt/bin/loldecrypt.rs"
 
 
-# Heavily optimizes and strips release builds
+# Optimize and strip release builds
 [profile.release]
 opt-level = 3
 debug = false
@@ -28,6 +28,6 @@ lto = true
 codegen-units = 1
 panic = "abort"
 
-# Optimizes external dependencies of dev builds
+# Optimize external dependencies of dev builds
 [profile.dev.package."*"]
 opt-level = 3

@@ -1,25 +1,24 @@
 # lolprotect
-some basic encryption/serialization thing
+some basic file encryption thing
+
+## how secure is it?
+it uses xor encryption how secure do you think its gonna be
 
 ## aren't there better ways of doing this?
-yes \
-\
-but hear me out \
-so one day i wanted to bring files from my home computer over to the school computers
-since i like using my own tools for programming, but for some reason they don't let
-students plug in usbs even though they could just download files off the internet \
-\
-so i learned rust \
-and then i made this. \
-to spite them.
+yes
 
-## what was the point in learning rust though?
-idk for fun lol :crab: :crab: :rocket: :rocket:
+## why'd you make this then?
+i thought itd be pretty funny
 
-## how does it work?
-xor encryption for life \
-but honestly i should've used des instead that would've been way more secure and saved a
-whole lot more time (i like suffering apparently) \
-also saves output into a bunch of different files so i can actually upload them to github
-since i can't download them off my own site (stupid firewall blocking us from visiting
-non educational websites...)
+also i wanted to spite my school for not allowing students to plug in
+usbs to bring files from home even though they could just download
+any files they wanted straight off the internet
+
+## so how does it work?
+it just strings the contents of all the files being encrypted together
+and uses a bunch of sha512 hashes of the encryption password modified
+by some state as the xor key
+
+it also generates a file header and a checksum to ensure that the
+correct version of the decryptor is being used and that the decryption
+password is correct
